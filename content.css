@@ -1,0 +1,85 @@
+/* ===== Packages ===== */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;align-items:stretch}
+.pkg{position:relative;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:2.2rem 1.9rem;display:flex;flex-direction:column;transition-property:box-shadow,translate;transition-duration:.35s}
+.pkg:hover{box-shadow:var(--shadow);translate:0 -8px}
+.pkg-featured{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 20px 50px rgba(15,43,37,.25)}
+.pkg.pkg-featured li{color:#e7e0cf}
+.pkg-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#bf8a1e,#f7c868);color:#fff;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.4rem 1rem;border-radius:999px;white-space:nowrap}
+.pkg-tag{color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:.78rem}
+.pkg h3{font-size:1.5rem;margin:.3rem 0 .8rem}
+.pkg-price{font-size:.95rem;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px dashed var(--line)}
+.pkg-featured .pkg-price{border-color:#246456}
+.pkg-price strong{font-family:var(--serif);font-size:1.7rem;color:var(--gold);display:block}
+.pkg ul{list-style:none;margin-bottom:1.8rem;flex:1}
+.pkg li{padding-left:1.6rem;position:relative;margin-bottom:.6rem;font-size:.93rem;color:var(--muted)}
+.pkg li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
+.pkg .btn{width:100%}
+.pkg-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:1.4rem}
+
+/* ===== Estimator ===== */
+.estimator{margin-top:3.5rem;display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;background:linear-gradient(135deg,#0f2b25,#00604b);color:#fff;border-radius:22px;padding:2.6rem;position:relative;overflow:hidden}
+.estimator::after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;border:2px dashed rgba(247,200,104,.35)}
+.est-intro h3{font-size:1.8rem;margin-bottom:.8rem}
+.est-intro p:not(.eyebrow){color:#bbceca}
+.est-step{margin-bottom:1.3rem}
+.est-step>span{display:block;font-size:.85rem;color:#f7c868;font-weight:600;margin-bottom:.55rem;letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips button{padding:.55rem 1.1rem;border-radius:999px;border:1px solid #445f59;color:#e7e0cf;font-size:.88rem;transition:background .25s,color .25s,border-color .25s}
+.chips button:hover{border-color:#f7c868}
+.chips button.on{background:#f7c868;border-color:#f7c868;color:#0f2b25;font-weight:600}
+.est-result{display:flex;align-items:center;flex-wrap:wrap;gap:1rem 1.6rem;background:rgba(255,255,255,.06);border:1px solid #246456;border-radius:16px;padding:1.2rem 1.4rem;margin-top:.4rem}
+.est-result small{display:block;width:100%;color:#bbceca;font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:-.6rem}
+.est-result strong{font-family:var(--serif);font-size:2rem;color:#f7c868}
+.est-result .btn{margin-left:auto}
+
+/* ===== NCR cards ===== */
+.ncr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.ncr-card{background:var(--white);border-radius:var(--radius);padding:1.8rem;transition-property:box-shadow,translate;transition-duration:.35s;border-top:3px solid transparent}
+.ncr-card:hover{box-shadow:var(--shadow);translate:0 -6px;border-top-color:var(--gold)}
+.ncr-ico{font-size:1.8rem;width:58px;height:58px;border-radius:50%;background:var(--cream);display:grid;place-items:center;margin-bottom:1rem}
+.ncr-card p{color:var(--muted);font-size:.93rem}
+
+/* ===== Payment & promise ===== */
+.assure{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:2.6rem}
+.assure-col{background:var(--white);border-radius:var(--radius);padding:2rem}
+.assure-col h3{margin-bottom:1.2rem}
+.pay-steps{list-style:none;counter-reset:p}
+.pay-steps li{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px dashed var(--line)}
+.pay-steps li:last-child{border:0}
+.pay-steps b{font-family:var(--serif);font-size:1.3rem;color:#fff;background:linear-gradient(135deg,#d7a745,#bf8a1e);min-width:62px;height:42px;border-radius:10px;display:grid;place-items:center}
+.pay-steps span{color:var(--muted)}
+.promise{list-style:none}
+.promise li{padding:.7rem 0 .7rem 2rem;position:relative;border-bottom:1px dashed var(--line);color:var(--muted)}
+.promise li:last-child{border:0}
+.promise li::before{content:"★";position:absolute;left:0;top:.65rem;color:var(--gold)}
+.promise b{color:var(--ink)}
+
+/* ===== Areas ===== */
+.area-tabs{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.area-tabs button{padding:.7rem 1.5rem;border-radius:999px;border:1px solid var(--line);font-weight:600;background:var(--white);transition:background .25s,color .25s}
+.area-tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.area-panel{display:none;flex-wrap:wrap;justify-content:center;gap:.6rem;max-width:900px;margin:0 auto}
+.area-panel.on{display:flex}
+.area-panel span{background:var(--white);border:1px solid var(--line);padding:.5rem 1rem;border-radius:999px;font-size:.9rem;animation:chipIn .4s ease both}
+.area-panel span::before{content:"📍 ";font-size:.8rem}
+@keyframes chipIn{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
+.city-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.8rem}
+.city-card{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;display:flex;align-items:flex-end;color:#fff}
+.city-card::before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(4,32,26,.85))}
+.city-card>div{position:relative;padding:1.5rem}
+.city-card h3{font-size:1.6rem}
+.city-card p{color:#e7e0cf;font-size:.9rem}
+
+form label.check{display:flex;align-items:center;gap:.6rem;font-weight:500}
+form label.check input{width:auto;margin:0;accent-color:#25d366}
+
+@media (max-width:900px){
+  .pkg-grid,.ncr-grid,.city-cards{grid-template-columns:1fr 1fr}
+  .estimator,.assure{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .pkg-grid,.ncr-grid,.city-cards{grid-template-columns:1fr}
+  .pkg-featured{order:-1}
+  .estimator{padding:1.6rem}
+  .est-result .btn{margin-left:0;width:100%}
+}
