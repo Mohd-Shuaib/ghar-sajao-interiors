@@ -83,3 +83,13 @@ form label.check input{width:auto;margin:0;accent-color:#25d366}
   .estimator{padding:1.6rem}
   .est-result .btn{margin-left:0;width:100%}
 }
+
+/* form submit states */
+.btn.loading{opacity:.85;cursor:wait;display:inline-flex;align-items:center;justify-content:center;gap:.6rem}
+.btn .spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:formspin .8s linear infinite}
+@keyframes formspin{to{transform:rotate(360deg)}}
+.form-note{background:#e8f5ec;border:1px solid #9fd3b0;color:#1f6b3e;border-radius:12px;padding:.9rem 1rem;line-height:1.5;text-align:left;animation:notein .35s ease}
+.form-note .tick{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#2f9a5a;color:#fff;font-size:.85rem;margin-right:.5rem;vertical-align:-2px}
+.form-note.error{background:#fdecec;border-color:#f2b4b4;color:#a12b2b}
+.form-note a{color:inherit;font-weight:700;text-decoration:underline}
+@keyframes notein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}

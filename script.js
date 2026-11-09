@@ -104,19 +104,50 @@ document.querySelector('[data-video]').addEventListener('click', () => {
 // Forms: every enquiry is saved to the Google Sheet (see google-sheet-script.txt).
 // Paste the Web App URL from Apps Script between the quotes below.
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzuYULJaMikA9veIdvParqpdqvSVlyRmIu7VLGnhQ_PGFwAfQAp55aYVOuVQllefCeS/exec';
-document.querySelectorAll('[data-form]').forEach(form => form.addEventListener('submit', e => {
-  e.preventDefault();
-  if (form.website && form.website.value) return; // honeypot
+document.querySelectorAll('[data-form]').forEach(form => {
   const btn = form.querySelector('button[type="submit"]');
-  const data = new URLSearchParams(new FormData(form));
-  data.delete('website');
-  data.set('whatsapp', form.whatsapp && form.whatsapp.checked ? 'Yes' : 'No');
-  data.set('form', form.closest('.modal') ? 'Book design session (popup)' : 'Contact form');
-  data.set('page', location.href);
-  const done = () => { btn.disabled = false; form.querySelector('.form-note').hidden = false; form.reset(); };
-  btn.disabled = true;
-  if (!SHEET_URL) return done();
-  fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: data }).then(done, done);
-}));
+  const btnText = btn.textContent;
+  const note = form.querySelector('.form-note');
+  const inModal = !!form.closest('.modal');
+  const showNote = (html, ok) => { note.innerHTML = html; note.classList.toggle('error', !ok); note.hidden = false; };
+  const resetBtn = () => { btn.disabled = false; btn.classList.remove('loading'); btn.textContent = btnText; };
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (form.website && form.website.value) return; // honeypot
+    note.hidden = true;
+    const phone = (form.phone.value || '').replace(/\D/g, '');
+    if (phone.length < 10) {
+      showNote('Please enter a valid 10-digit mobile number.', false);
+      form.phone.focus();
+      return;
+    }
+    const name = (form.name.value || '').trim().split(' ')[0];
+    const data = new URLSearchParams(new FormData(form));
+    data.delete('website');
+    data.set('whatsapp', form.whatsapp && form.whatsapp.checked ? 'Yes' : 'No');
+    data.set('form', inModal ? 'Book design session (popup)' : 'Contact form');
+    data.set('page', location.href);
+
+    btn.disabled = true;
+    btn.classList.add('loading');
+    btn.innerHTML = '<span class="spin"></span> Submitting…';
+
+    const ok = () => {
+      resetBtn();
+      form.reset();
+      showNote('<span class="tick">✓</span><b>Thank you' + (name ? ', ' + name : '') + '!</b> Your request has been received. Our designer will call you within 24 hours.', true);
+      setTimeout(() => {
+        if (inModal) closeModal();
+        setTimeout(() => { note.hidden = true; }, inModal ? 400 : 0);
+      }, inModal ? 3000 : 6000);
+    };
+    const fail = () => {
+      resetBtn();
+      showNote('Sorry, that did not go through. Please try again, or call / WhatsApp us on <a href="tel:+919927502157">+91 99275 02157</a>.', false);
+    };
+    fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: data }).then(ok, fail);
+  });
+});
 
 document.getElementById('year').textContent = new Date().getFullYear();
