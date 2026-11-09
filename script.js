@@ -101,12 +101,22 @@ document.querySelector('[data-video]').addEventListener('click', () => {
   window.open('https://www.youtube.com/', '_blank', 'noopener');
 });
 
-// Forms: front-end only for now. Connect to Formspree, Google Forms, or your backend to receive leads.
+// Forms: every enquiry is saved to the Google Sheet (see google-sheet-script.txt).
+// Paste the Web App URL from Apps Script between the quotes below.
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzuYULJaMikA9veIdvParqpdqvSVlyRmIu7VLGnhQ_PGFwAfQAp55aYVOuVQllefCeS/exec';
 document.querySelectorAll('[data-form]').forEach(form => form.addEventListener('submit', e => {
   e.preventDefault();
   if (form.website && form.website.value) return; // honeypot
-  form.querySelector('.form-note').hidden = false;
-  form.reset();
+  const btn = form.querySelector('button[type="submit"]');
+  const data = new URLSearchParams(new FormData(form));
+  data.delete('website');
+  data.set('whatsapp', form.whatsapp && form.whatsapp.checked ? 'Yes' : 'No');
+  data.set('form', form.closest('.modal') ? 'Book design session (popup)' : 'Contact form');
+  data.set('page', location.href);
+  const done = () => { btn.disabled = false; form.querySelector('.form-note').hidden = false; form.reset(); };
+  btn.disabled = true;
+  if (!SHEET_URL) return done();
+  fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: data }).then(done, done);
 }));
 
 document.getElementById('year').textContent = new Date().getFullYear();
