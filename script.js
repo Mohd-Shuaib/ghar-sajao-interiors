@@ -144,7 +144,7 @@ document.querySelectorAll('[data-form]').forEach(form => {
     };
     const fail = () => {
       resetBtn();
-      showNote('Sorry, that did not go through. Please try again, or call / WhatsApp us on <a href="tel:+919927502157">+91 99275 02157</a>.', false);
+      showNote('Sorry, that did not go through. Please try again, or call / WhatsApp us on <a href="tel:+918750667862">+91 87506 67862</a>.', false);
     };
     fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: data }).then(ok, fail);
   });
