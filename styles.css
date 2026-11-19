@@ -29,6 +29,8 @@ h3{font-size:1.25rem;margin-bottom:.4rem}
 .topbar{background:var(--ink);color:#d9d2c1;font-size:.82rem}
 .topbar-inner{display:flex;justify-content:space-between;padding:.5rem 0;gap:1rem}
 .topbar-contact{display:flex;gap:1.5rem;flex-wrap:wrap}
+.topbar-contact a{display:inline-flex;align-items:center;gap:.5rem}
+.topbar-contact .ico{width:16px;height:16px;flex:none;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .topbar-social{display:flex;gap:.9rem;font-weight:600}
 .topbar a:hover{color:var(--gold)}
 
